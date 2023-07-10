@@ -41,7 +41,6 @@ app.use('/feedback' , require('./Routes/FeedbackRoutes'))
 app.use('/quote', require('./Routes/QuotationRoutes'))
 const Order = require('./Models/Order');
 const Customer = require('./Models/Customer');
-const stripe = require('stripe')(process.env.STRIPE_KEY)
 
    app.post('/Payment' , jsonParser , async (req,res)=>{
     try {
@@ -83,7 +82,6 @@ app.post("/create-payment-intent", jsonParser, async (req, res) => {
       if (!paymentIntent) {
         return res.status(500).json({ error: "Payment Intent Error" });
       }
-  
       res.status(200).json({ ClientSecret: paymentIntent.client_secret });
     } catch (err) {
       console.log(err);
@@ -136,7 +134,26 @@ app.post("/createOrder" ,  FetchUser , jsonParser , async( req, res ) =>{
     }
 })
 
+const stripe = require('stripe')(process.env.STRIPE_KEY)
 
+app.post('/PaymentIntent', jsonParser , async (req,res)=>
+{
+  try
+  {
+     const {Price} = req.body;
+      const paymentIntent = await stripe.paymentIntents.create({
+        amount: Price * 100,
+        currency: 'eur',
+      });
+      console.log(paymentIntent.client_secret)
+      res.status(200).json({ClientSecret:paymentIntent.client_secret,SK:process.env.STRIPE_KEY})
+  }
+  catch(err)
+  {
+    console.log(err);
+    res.status(500).json({ error: "Server Error" });
+  }
+})
 
 
 PORT = process.env.PORT || 5001
