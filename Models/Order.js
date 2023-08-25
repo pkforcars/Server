@@ -29,6 +29,8 @@ const OrderSchema = new Schema(
         Delivery : String,
         Spare : Boolean,
         OrderValue : Number,
+        FrontText: String,
+        RearText: String,
         OrderStatus:
         {
             type: String,

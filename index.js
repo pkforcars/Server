@@ -123,6 +123,8 @@ app.post("/createOrder" ,  FetchUser , jsonParser , async( req, res ) =>{
             Spare : req.body.Spare,
             OrderValue : req.body.OrderValue,
             OrderStatus: "Not Processed",
+            FrontText: req.body.FrontText,
+            RearText: req.body.RearText,
         }).save()
         res.status(200).json({success: true})
 
