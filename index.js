@@ -90,12 +90,11 @@ app.post("/create-payment-intent", jsonParser, async (req, res) => {
     }
   });
   
-app.post("/createOrder" ,  FetchUser , jsonParser , async( req, res ) =>{
+app.post("/createOrder"  , jsonParser , async( req, res ) =>{
     try
     {
-      const FindCustomer = await Customer.findOne( { _id : req.user.id })
         const NewOrder = new Order({
-            UserEmail : FindCustomer.email,
+            UserEmail : req.body.Email,
             Email: req.body.Email,
             Address1: req.body.Address1,
             Address2: req.body.Address2,
@@ -125,6 +124,18 @@ app.post("/createOrder" ,  FetchUser , jsonParser , async( req, res ) =>{
             OrderStatus: "Not Processed",
             FrontText: req.body.FrontText,
             RearText: req.body.RearText,
+            OtherItems: req.body.OtherItems,
+            Font: req.body.Font,
+            LeftBadge: req.body.LeftBadge,
+            LeftBadgeBackground: req.body.LeftBadgeBackground,
+            RightBadge: req.body.RightBadge,
+            RightBadgeBackground: req.body.RightBadgeBackground,
+            FooterText: req.body.FooterText,
+            FooterColor: req.body.FooterColor,
+            PlateType: req.body.PlateType,
+            BadgeCity: req.body.BadgeCity,
+            BadgeFlag: req.body.BadgeFlag,
+            timestamp: Date.now(),
         }).save()
         res.status(200).json({success: true})
 
