@@ -31,12 +31,27 @@ const OrderSchema = new Schema(
         OrderValue : Number,
         FrontText: String,
         RearText: String,
+        Font: String,
+        LeftBadge: Array,
+        LeftBadgeBackground: String,
+        RightBadge: Array,
+        RightBadgeBackground: String,
+        FooterText: String,
+        FooterColor: String,
+        PlateType: String,
+        BadgeCity: String,
+        BadgeFlag: String,
+        Layout: String,
         OrderStatus:
         {
             type: String,
             default: 'Not Processed',
             enum : [ 'Not Processed' , 'Processing' , 'Disputed' , "Delivered" , "Cancelled" ]
         }, 
+        OtherItems:
+        {
+            type: Array
+        },
         timestamp: 
         {
             type: Date,
