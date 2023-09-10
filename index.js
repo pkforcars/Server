@@ -16,7 +16,9 @@ app.use(cors({
     'http://127.0.0.1:3000',
     'https://platekeys4cars.vercel.app',
     'https://pk4cars.vercel.app',
-    'https://platenkeys4cars.co.uk'
+    'https://platenkeys4cars.co.uk',
+    'https://platenkeys4cars.co.uk/',
+    'https://www.platenkeys4cars.co.uk',
 ],
   optionsSuccessStatus: 200
 }));
@@ -137,6 +139,9 @@ app.post("/createOrder"  , jsonParser , async( req, res ) =>{
             BadgeFlag: req.body.BadgeFlag,
             timestamp: Date.now(),
         }).save()
+        console.log(
+          NewOrder
+        )
         res.status(200).json({success: true})
 
 
