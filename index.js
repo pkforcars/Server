@@ -162,7 +162,7 @@ app.post('/PaymentIntent', jsonParser , async (req,res)=>
      const {Price} = req.body;
       const paymentIntent = await stripe.paymentIntents.create({
         amount: Price * 100,
-        currency: 'eur',
+        currency: 'gbp',
       });
       console.log(paymentIntent.client_secret)
       res.status(200).json({ClientSecret:paymentIntent.client_secret,SK:process.env.STRIPE_KEY})
